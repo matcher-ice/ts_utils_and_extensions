@@ -53,6 +53,13 @@ declare global
          * @param selector A transform function to apply to each element.
          */
         sum(selector: (item: T) => number): number;
+
+        /**
+         * Merges two arrays into a new array by applying a specified function.
+         * @param second The other array to merge.
+         * @param selector A transform function which specifies how to merge elements of the two arrays.
+         */
+        zip<U, V>(second: U[] | readonly U[], selector: (firstItem: T, secondItem: U) => V): V[];
     }
 
     interface ReadonlyArray<T>
@@ -148,3 +155,16 @@ if (Array.prototype.sum == null)
     }
 }
 
+if (Array.prototype.zip == null)
+{
+    Array.prototype.zip = function<T, U, V> (second: U[] | readonly U[], selector: (firstItem: T, secondItem: U) => V): V[]
+    {
+        const iMax = (this.length < second.length) ? this.length : second.length;
+        const r: V[] = [];
+        for (let i = 0; i < iMax; ++i)
+        {
+            r.push(selector(this[i], second[i]));
+        }
+        return r;
+    };
+}
