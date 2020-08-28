@@ -17,6 +17,12 @@ declare global
         distinct(): T[];
 
         /**
+         * Splits the original array into subarrays with specified number of elements and returns an iterable of them.
+         * @param numElements Number of elements of each subarray.
+         */
+        divide(numElements: number): IterableIterator<T[]>;
+
+        /**
          * Returns a new array from which the elements equal to an element of `itemToExclude` are removed.
          * @param itemsToExclude An array whose elements are removed from new array.
          */
@@ -90,6 +96,27 @@ if (Array.prototype.distinct == null)
     {
         const set = new Set<T>(this);
         return [...set.values()];
+    };
+}
+
+if (Array.prototype.divide == null)
+{
+    Array.prototype.divide = function*<T> (numElements: number): IterableIterator<T[]>
+    {
+        let buffer: T[] = [];
+        for (let i = 0; i < this.length; ++i)
+        {
+            buffer.push(this[i]);
+            if ((i + 1) % numElements === 0)
+            {
+                yield buffer;
+                buffer = [];
+            }
+        }
+        if (buffer.length > 0)
+        {
+            yield buffer;
+        }
     };
 }
 
