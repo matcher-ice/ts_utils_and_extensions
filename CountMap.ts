@@ -1,3 +1,6 @@
+/**
+ * Holds key-value pairs whose values are used as counters.
+ */
 export class CountMap<T extends Object>
 {
     private readonly map: Map<T, number>;
