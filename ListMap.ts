@@ -1,3 +1,6 @@
+/**
+ * Holds key-value pairs whose values are lists.
+ */
 export class ListMap<K, V>
 {
     private readonly map: Map<K, V[]>;
