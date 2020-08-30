@@ -9,3 +9,15 @@ export function take<T>(iterator: IterableIterator<T>, numElements: number): rea
     }
     return ret;
 }
+
+export function firstOrDefault<T>(iterator: IterableIterator<T>, predicate: (item: T) => boolean): T | undefined
+{
+    for (const item of iterator)
+    {
+        if (predicate(item))
+        {
+            return item;
+        }
+    }
+    return undefined;
+}
