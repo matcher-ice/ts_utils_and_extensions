@@ -1,4 +1,4 @@
-function take<T>(iterator: IterableIterator<T>, numElements: number): readonly T[]
+export function take<T>(iterator: IterableIterator<T>, numElements: number): readonly T[]
 {
     const ret: T[] = [];
     for (let i = 0; i < numElements; ++i)
