@@ -35,9 +35,9 @@ export function* enumarteCombination<T>(items: readonly T[], count: number, isRe
  */
 export function* cartesianProduct<T>(...args: readonly T[][]): IterableIterator<readonly T[]>
 {
-    if (args.length === 1)
+    if (args.length === 0)
     {
-        yield args[0];
+        yield [];
     }
     else
     {
